@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hoverable Sidenav Buttons</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    
+    .sidenav {
+      height: 100%;
+      width: 60px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background-color: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 20px;
+    }
+
+   
+    .sidenav a {
+      height: 50px;
+      width: 50px;
+      margin: 5px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #555;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      border-radius: 5px;
+    }
+
+    
+    .sidenav a.green { background-color: #4CAF50; }
+    .sidenav a.blue { background-color: #2196F3; }
+    .sidenav a.red { background-color: #f44336; }
+    .sidenav a.gray { background-color: #555; }
+
+    /* Expand on hover */
+    .sidenav a:hover {
+      width: 200px;
+      justify-content: flex-start;
+      padding-left: 20px;
+    }
+
+    /* Content area */
+    .main {
+      margin-left: 70px;
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a href="#" class="green">Home</a>
+  <a href="#" class="blue">About</a>
+  <a href="#" class="red">Services</a>
+  <a href="#" class="gray">Contact</a>
+</div>
+
+<div class="main">
+  <h2>Hoverable Sidenav Buttons</h2>
+  <p>Hover over the buttons in the left side navigation to open them.</p>
+</div>
+
+</body>
+</html>
