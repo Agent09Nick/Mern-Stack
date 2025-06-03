@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Repeat Text Prompt</title>
+</head>
+<body style="background-color:#121212; color: #ffffff; font-family: sans-serif;">
+
+    <h2>Repeat Text Example</h2>
+    <button onclick="repeatText()">Click here </button>
+
+    <script>
+        function repeatText() {
+            let times = prompt("How many times do you want to repeat the text?");
+            if (times !== null) {
+                times = parseInt(times);
+                if (!isNaN(times) && times > 0) {
+                    let repeatedText = "";
+                    for (let i = 0; i < times; i++) {
+                        repeatedText += "This is the repeated text\n";
+                    }
+                    alert(repeatedText);
+                } else {
+                    alert("Please enter a valid number greater than 0.");
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
