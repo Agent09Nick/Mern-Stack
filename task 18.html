@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px; 
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            flex: 0 0 100px; 
+            text-align: right;
+            margin-right: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            flex: 1; 
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            outline: none;
+        }
+        .form-group textarea {
+            resize: vertical; 
+            min-height: 80px; 
+        }
+        .form-group .error-message {
+            color: red;
+            margin-left: 10px;
+            font-size: 0.9em;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #66afe9;
+            box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+        .form-group.has-error input,
+        .form-group.has-error textarea {
+            border-color: red;
+        }
+        .submit-button {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .submit-button input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form action="#" method="post">
+            <div class="form-group has-error">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="">
+                <span class="error-message">This field is required</span>
+            </div>
+
+            <div class="form-group has-error">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" value="">
+                <span class="error-message">A valid email address is required</span>
+            </div>
+
+            <div class="form-group has-error">
+                <label for="website">Website:</label>
+                <input type="text" id="website" name="website" value="">
+                <span class="error-message">A valid url is required</span>
+            </div>
+
+            <div class="form-group has-error">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message"></textarea>
+                <span class="error-message">This field is required</span>
+            </div>
+
+            <div class="submit-button">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
