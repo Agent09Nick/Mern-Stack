@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #8A2BE2; 
+            color: #fff; /* White text */
+        }
+
+        .container {
+            background-color: #6A1B9A; 
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .input-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            background-color: #fff; /* White background for the input group */
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            border: none;
+            padding: 10px;
+            font-size: 1.1em;
+            width: 150px;
+            text-align: center;
+            outline: none; /* Remove outline on focus */
+            border-radius: 5px; /* Slight border-radius for the input */
+            color: #333; /* Darker text for input */
+        }
+
+        button {
+            background-color: #5D3FD3; /* A contrasting purple for the button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4C33A8; /* Darker hover effect */
+        }
+
+        .results-section {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px; /* Space between result boxes */
+        }
+
+        .result-box {
+            background-color: #6A1B9A; /* Same as container for consistency */
+            border: 2px solid #9C27B0; /* A slightly lighter purple border */
+            border-radius: 10px;
+            padding: 20px;
+            width: 120px; /* Fixed width for the boxes */
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .result-label {
+            font-size: 1.1em;
+            text-transform: uppercase;
+            color: #ccc; /* Lighter color for the label */
+        }
+
+        .error-message {
+            color: #FFEB3B; /* Yellow for error messages */
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AGE CALCULATOR</h1>
+
+        <div class="input-section">
+            <input type="text" id="dobInput" placeholder="DD/MM/YYYY">
+            <button onclick="calculateAge()">Calculator</button>
+        </div>
+
+        <div class="results-section">
+            <div class="result-box">
+                <div id="years" class="result-number">00</div>
+                <div class="result-label">Year</div>
+            </div>
+            <div class="result-box">
+                <div id="months" class="result-number">00</div>
+                <div class="result-label">Month</div>
+            </div>
+            <div class="result-box">
+                <div id="days" class="result-number">00</div>
+                <div class="result-label">Day</div>
+            </div>
+        </div>
+
+        <p id="errorMessage" class="error-message"></p>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const dobInput = document.getElementById('dobInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const yearsDisplay = document.getElementById('years');
+            const monthsDisplay = document.getElementById('months');
+            const daysDisplay = document.getElementById('days');
+
+            // Clear previous error messages and results
+            errorMessage.textContent = '';
+            yearsDisplay.textContent = '00';
+            monthsDisplay.textContent = '00';
+            daysDisplay.textContent = '00';
+
+            if (!dobInput) {
+                errorMessage.textContent = 'Please enter your date of birth.';
+                return;
+            }
+
+            const parts = dobInput.split('/');
+            if (parts.length !== 3 || isNaN(parts[0]) || isNaN(parts[1]) || isNaN(parts[2])) {
+                errorMessage.textContent = 'Invalid date format. Please use MM/DD/YYYY.';
+                return;
+            }
+
+            const month = parseInt(parts[0]);
+            const day = parseInt(parts[1]);
+            const year = parseInt(parts[2]);
+
+            const dob = new Date(year, month - 1, day); // Month is 0-indexed in Date object
+
+            // Check for invalid date (e.g., February 30th)
+            if (isNaN(dob.getTime()) || dob.getMonth() !== month - 1 || dob.getDate() !== day || dob.getFullYear() !== year) {
+                errorMessage.textContent = 'Invalid date entered. Please check your MM/DD/YYYY.';
+                return;
+            }
+
+            const today = new Date();
+
+            if (dob > today) {
+                errorMessage.textContent = 'Date of birth cannot be in the future.';
+                return;
+            }
+
+            let ageYears = today.getFullYear() - dob.getFullYear();
+            let ageMonths = today.getMonth() - dob.getMonth();
+            let ageDays = today.getDate() - dob.getDate();
+
+            // Adjust months and years
+            if (ageDays < 0) {
+                ageMonths--;
+                const prevMonth = new Date(today.getFullYear(), today.getMonth() - 1, 0);
+                ageDays += prevMonth.getDate();
+            }
+
+            if (ageMonths < 0) {
+                ageYears--;
+                ageMonths += 12;
+            }
+
+            yearsDisplay.textContent = ageYears < 10 ? '0' + ageYears : ageYears;
+            monthsDisplay.textContent = ageMonths < 10 ? '0' + ageMonths : ageMonths;
+            daysDisplay.textContent = ageDays < 10 ? '0' + ageDays : ageDays;
+        }
+    </script>
+</body>
+</html>
