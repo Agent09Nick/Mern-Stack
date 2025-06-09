@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1: Reverse a Number (Interactive)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        h2 {
+            color: #0056b3;
+        }
+        input[type="number"] {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 150px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        p.instruction {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Exercise 1: Reverse a Number</h2>
+        <p class="instruction">Enter a number in the field below and click "Reverse".</p>
+
+        <label for="numberInput">Enter Number:</label>
+        <input type="number" id="numberInput" value="32243" placeholder="e.g., 12345">
+        <button onclick="reverseAndDisplayNumber()">Reverse</button>
+
+        <div id="reversedNumberOutput" class="output"></div>
+    </div>
+
+    <script>
+        /
+        function reverseNumber(num) {
+            
+            const isNegative = num < 0;
+            const absoluteNum = Math.abs(num);
+
+            
+            const numStr = String(absoluteNum);
+
+            
+            const reversedStr = numStr.split('').reverse().join('');
+
+           
+            let reversed = parseFloat(reversedStr);
+            if (isNegative) {
+                reversed *= -1;
+            }
+            return reversed;
+        }
+
+       
+        function reverseAndDisplayNumber() {
+            const inputElement = document.getElementById('numberInput');
+            const outputDiv = document.getElementById('reversedNumberOutput');
+
+            const inputValue = inputElement.value;
+
+           
+            if (inputValue === '' || isNaN(inputValue)) {
+                outputDiv.textContent = 'Please enter a valid number.';
+                outputDiv.style.color = 'red';
+                return;
+            }
+
+            const numberToReverse = Number(inputValue); 
+            const reversed = reverseNumber(numberToReverse);
+
+            outputDiv.textContent = `Original: ${numberToReverse}, Reversed: ${reversed}`;
+            outputDiv.style.color = '#28a745'; // Reset color
+        }
+
+        s
+        document.getElementById('numberInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                reverseAndDisplayNumber();
+            }
+        });
+    </script>
+
+</body>
+</html>

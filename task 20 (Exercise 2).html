@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2: Sort String Alphabetically (Interactive)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        h2 {
+            color: #0056b3;
+        }
+        input[type="text"] {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        p.instruction {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Exercise 2: Sort String Alphabetically</h2>
+        <p class="instruction">Enter a string in the field below and click "Sort".</p>
+
+        <label for="stringInput">Enter String:</label>
+        <input type="text" id="stringInput" value="webmaster" placeholder="e.g., hello">
+        <button onclick="sortAndDisplayString()">Sort</button>
+
+        <div id="sortedStringOutput" class="output"></div>
+    </div>
+
+    <script>
+        
+        function sortStringAlphabetically(str) {
+            
+            const charArray = str.split('');
+
+        ]
+            charArray.sort();
+
+            
+            const sortedStr = charArray.join('');
+
+            return sortedStr;
+        }
+
+        
+        function sortAndDisplayString() {
+            
+
+            const inputElement = document.getElementById('stringInput');
+            const outputDiv = document.getElementById('sortedStringOutput');
+
+            const inputValue = inputElement.value;
+
+            
+            if (inputValue === '') {
+                outputDiv.textContent = 'Please enter a string.';
+                outputDiv.style.color = 'red';
+                
+                return;
+            }
+
+            const sorted = sortStringAlphabetically(inputValue);
+
+            outputDiv.textContent = `Original: '${inputValue}', Sorted: '${sorted}'`;
+            outputDiv.style.color = '#28a745'; 
+            
+        }
+
+        
+        document.getElementById('stringInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sortAndDisplayString();
+            }
+        });
+
+    </script>
+
+</body>
+</html>
