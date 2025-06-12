@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Timer</title>
+    <style>
+       
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e0f2f7; 
+            margin: 0;
+            overflow: hidden; 
+        }
+
+        .timer-container {
+            background-color: #ffffff; 
+            padding: 40px 60px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: fit-content; 
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .time-display {
+            font-size: 4em;
+            margin-bottom: 40px;
+            color: #333;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums; 
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            outline: none; 
+        }
+
+        button.start {
+            background-color: #4CAF50; 
+        }
+
+        button.start:hover {
+            background-color: #45a049;
+        }
+
+        button.stop {
+            background-color: #f44336; 
+        }
+
+        button.stop:hover {
+            background-color: #da190b;
+        }
+
+        button.reset {
+            background-color: #8BC34A; 
+        }
+
+        button.reset:hover {
+            background-color: #7cb342;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timer-container">
+        <h1>TIMER</h1>
+        <div class="time-display" id="time-display">24 : 49</div>
+        <div class="buttons">
+            <button class="start" id="start-button">Start</button>
+            <button class="stop" id="stop-button">Stop</button>
+            <button class="reset" id="reset-button">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        let timerInterval;
+        
+        const initialMinutes = 24;
+        const initialSeconds = 49;
+        let timeInSeconds = initialMinutes * 60 + initialSeconds;
+
+        const timeDisplay = document.getElementById('time-display');
+        const startButton = document.getElementById('start-button');
+        const stopButton = document.getElementById('stop-button');
+        const resetButton = document.getElementById('reset-button');
+
+        function updateTimeDisplay() {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            // Pad with leading zero if number is less than 10
+            timeDisplay.textContent =
+                `${minutes.toString().padStart(2, '0')} : ${seconds.toString().padStart(2, '0')}`;
+        }
+
+        startButton.addEventListener('click', () => {
+           
+            if (!timerInterval) {
+                timerInterval = setInterval(() => {
+                    if (timeInSeconds > 0) {
+                        timeInSeconds--;
+                        updateTimeDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                        
+                        alert("Time's up!");
+                    }
+                }, 1000); 
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerInterval = null; 
+        });
+
+        resetButton.addEventListener('click', () => {
+            clearInterval(timerInterval); 
+            timerInterval = null; 
+            timeInSeconds = initialMinutes * 60 + initialSeconds; 
+            updateTimeDisplay(); 
+        });
+
+        
+        updateTimeDisplay();
+    </script>
+
+</body>
+</html>
